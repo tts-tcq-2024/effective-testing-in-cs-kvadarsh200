@@ -17,7 +17,28 @@ namespace MisalignedSpace {
         static void Main(string[] args) {
             int result = printColorMap();
             Debug.Assert(result == 25);
+            // Capture the console output
+            StringWriter consoleOutput = new StringWriter();
+            Console.SetOut(consoleOutput);
+
+            // Call the printColorMap method
+            int result = printColorMap();
+
+            // Reset the console output to standard output
+            Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
+
+            // Get the captured output as a string
+            string output = consoleOutput.ToString();
+
+            // Assert that the total number of lines is 25
+            Debug.Assert(result == 25);
+
+            // Assert that the specific incorrect line is not present
+            Debug.Assert(!output.Contains("1 | White | Orange"));
+
             Console.WriteLine("All is well (maybe!)");
+
+            
         }
     }
 }

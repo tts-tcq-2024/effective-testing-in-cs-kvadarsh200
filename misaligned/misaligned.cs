@@ -17,6 +17,11 @@ namespace MisalignedSpace {
         static void Main(string[] args) {
             int result = printColorMap();
             Debug.Assert(result == 25);
+            string output = consoleOutput.ToString();
+            string[] outputLines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string expectedLine = "1 | White | Orange";
+            bool lineFound = Array.Exists(outputLines, line => line.Trim() == expectedLine);
+            Debug.Assert(lineFound, $"Test failed: Expected line '{expectedLine}' not found in the output.");
             Console.WriteLine("All is well (maybe!)");
         }
     }
